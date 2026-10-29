@@ -151,3 +151,31 @@ window.GUIDE = [
   { cat: { fr: 'Souks', en: 'Souks', es: 'Zocos', ar: 'الأسواق' }, nom: 'Souk Semmarine', t: { fr: 'Babouches, lanternes et épices : votre concierge peut vous accompagner pour bien négocier.', en: 'Slippers, lanterns and spices: your concierge can come along to help you bargain.', es: 'Babuchas, faroles y especias: su conserje puede acompañarle para negociar.', ar: 'بلغة، فوانيس وتوابل: يمكن للكونسيرج مرافقتكم للتفاوض.' }, q: 'Souk Semmarine Marrakech' },
   { cat: { fr: 'Rooftop', en: 'Rooftop', es: 'Azotea', ar: 'سطح' }, nom: 'Place Jemaa el-Fna', t: { fr: 'À voir au coucher du soleil depuis une terrasse, puis dîner dans les stands.', en: 'See it at sunset from a terrace, then dine at the food stalls.', es: 'Para verla al atardecer desde una terraza y cenar en los puestos.', ar: 'شاهدوها عند الغروب من إحدى الشرفات ثم تناولوا العشاء في الأكشاك.' }, q: 'Jemaa el-Fna' }
 ];
+
+/* Contenu fictif complémentaire (démo) */
+Object.assign(window.VILLA, {
+  majordome: 'Youssef',
+  chiffres: [
+    { v: '650 m²', t: { fr: 'habitables', en: 'living space', es: 'habitables', ar: 'مساحة السكن' } },
+    { v: '5', t: { fr: 'suites', en: 'suites', es: 'suites', ar: 'أجنحة' } },
+    { v: '10', t: { fr: 'voyageurs', en: 'guests', es: 'huéspedes', ar: 'ضيوف' } },
+    { v: '1 ha', t: { fr: 'de jardins', en: 'of gardens', es: 'de jardines', ar: 'من الحدائق' } }
+  ],
+  mot: {
+    fr: 'Toute l’équipe est heureuse de vous accueillir. Cette maison a été pensée comme un refuge : prenez le temps, nous nous occupons du reste. Un souhait, une envie, à toute heure : écrivez-moi.',
+    en: 'The whole team is delighted to welcome you. This house was designed as a haven: take your time, we take care of the rest. Any wish, at any hour: just message me.',
+    es: 'Todo el equipo está encantado de recibirles. Esta casa fue pensada como un refugio: tómense su tiempo, nosotros nos ocupamos del resto. Cualquier deseo, a cualquier hora: escríbanme.',
+    ar: 'يسعد فريقنا بأكمله باستقبالكم. صُمّم هذا البيت ليكون ملاذاً: خذوا وقتكم ونحن نتكفّل بالباقي. أي رغبة وفي أي ساعة: راسلوني.'
+  },
+  role: { fr: 'votre majordome', en: 'your butler', es: 'su mayordomo', ar: 'رئيس الخدم' },
+  equipe: [
+    { n: 'Youssef', r: { fr: 'Majordome · 8 h – 22 h', en: 'Butler · 8 am – 10 pm', es: 'Mayordomo · 8 h – 22 h', ar: 'رئيس الخدم · 8 – 22' } },
+    { n: 'Fatima', r: { fr: 'Cheffe de cuisine', en: 'Head chef', es: 'Jefa de cocina', ar: 'رئيسة المطبخ' } },
+    { n: 'Rachid', r: { fr: 'Chauffeur', en: 'Driver', es: 'Chófer', ar: 'السائق' } },
+    { n: 'Amina', r: { fr: 'Gouvernante', en: 'Housekeeper', es: 'Gobernanta', ar: 'مدبّرة المنزل' } }
+  ]
+});
+Object.assign(window.UI.fr, { mot: 'Le mot de la maison', equipe: 'Votre équipe', galerie: 'La villa en images' });
+Object.assign(window.UI.en, { mot: 'A word from the house', equipe: 'Your team', galerie: 'The villa in pictures' });
+Object.assign(window.UI.es, { mot: 'Unas palabras de la casa', equipe: 'Su equipo', galerie: 'La villa en imágenes' });
+Object.assign(window.UI.ar, { mot: 'كلمة البيت', equipe: 'فريقكم', galerie: 'الفيلا بالصور' });

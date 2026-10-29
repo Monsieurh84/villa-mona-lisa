@@ -78,6 +78,15 @@
     <path d="M108 250V120a92 92 0 0 1 184 0v130" fill="none" stroke="#D9B87F" stroke-opacity=".35"/></g>
   </svg>`;
 
+
+  const SCN = {
+    piscine: ['#2B4C40', '#7FA7A0', '<rect x="0" y="120" width="320" height="80" fill="#7FA7A0"/><path d="M20 140h80M140 152h90M60 166h70" stroke="#F6EEDF" stroke-opacity=".6" stroke-width="3" stroke-linecap="round"/><path d="M0 120h320" stroke="#D9B87F" stroke-width="3"/><path d="M40 120V60a30 30 0 0 1 60 0v60M130 120V60a30 30 0 0 1 60 0v60M220 120V60a30 30 0 0 1 60 0v60" fill="#B4552D" fill-opacity=".55" stroke="#D9B87F" stroke-width="2"/>'],
+    suite: ['#EADCC6', '#B8935A', '<rect x="40" y="110" width="240" height="50" rx="8" fill="#FFFBF4"/><rect x="40" y="80" width="240" height="40" rx="10" fill="#F4EBDD" stroke="#B8935A"/><rect x="70" y="92" width="70" height="22" rx="8" fill="#FFFBF4"/><rect x="180" y="92" width="70" height="22" rx="8" fill="#FFFBF4"/><path d="M130 20v40M160 14v46M190 20v40" stroke="#B4552D" stroke-width="3"/><circle cx="130" cy="62" r="6" fill="#D9B87F"/><circle cx="160" cy="62" r="6" fill="#D9B87F"/><circle cx="190" cy="62" r="6" fill="#D9B87F"/>'],
+    rooftop: ['#B4552D', '#D9B87F', '<circle cx="230" cy="90" r="34" fill="#F6D9A8"/><path d="M0 130l60-40 50 30 70-50 60 40 80-30v120H0z" fill="#2B4C40" opacity=".7"/><path d="M0 150h320v50H0z" fill="#1E3A31"/><path d="M30 150v-20h60v20M200 150v-14h80v14" fill="#F4EBDD"/>'],
+    hammam: ['#5A6B5F', '#C9BDA7', '<path d="M60 200V90a100 100 0 0 1 200 0v110" fill="#EADCC6" opacity=".8"/><circle cx="110" cy="80" r="5" fill="#FFF8EC"/><circle cx="160" cy="60" r="5" fill="#FFF8EC"/><circle cx="210" cy="80" r="5" fill="#FFF8EC"/><circle cx="135" cy="105" r="4" fill="#FFF8EC"/><circle cx="185" cy="105" r="4" fill="#FFF8EC"/><rect x="100" y="150" width="120" height="16" rx="6" fill="#B8935A"/><path d="M130 140c-6-10 6-14 0-24M160 140c-6-10 6-14 0-24M190 140c-6-10 6-14 0-24" stroke="#FFF8EC" stroke-width="2.5" fill="none" stroke-linecap="round"/>']
+  };
+  const scene = k => { const [a, b, d] = SCN[k]; return `<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="g${k}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><rect width="320" height="200" fill="url(#g${k})"/>${d}</svg>`; };
+
   function nuits() { return Math.max(1, Math.round((guest.au - guest.du) / 864e5)); }
 
   /* ---------- Rendu ---------- */
@@ -108,6 +117,7 @@
     $('#main').innerHTML = `
       <div class="card stay"><div class="row"><div><p class="label">${t('sejour')}</p><b>${dfmt(guest.du, { day: 'numeric', month: 'short' })} – ${dfmt(guest.au, { day: 'numeric', month: 'short' })}</b></div><span class="muted small">${n} ${t('nuits')}</span></div>
         ${stayTxt ? `<div class="prog" aria-hidden="true"><i style="width:${pct}%"></i></div><span class="small muted">${stayTxt}</span>` : ''}</div>
+      <section class="sec card mot"><p class="label">${t('mot')}</p><p style="margin:0 0 14px;font-size:15.5px">« ${esc(L(V.mot))} »</p><div style="display:flex;align-items:center;gap:12px"><span class="avatar">${esc(V.majordome[0])}</span><span><b>${esc(V.majordome)}</b><br><span class="small muted">${esc(L(V.role))}</span></span></div></section>
       <section class="sec"><p class="label">${t('raccourcis')}</p><div class="tiles">
         <button class="tile" id="wifiT"><span class="ic">${ic('wifi')}</span><b>${t('wifi')}</b><span>${esc(V.wifi.reseau)}<br>${esc(V.wifi.mdp)}</span></button>
         <button class="tile" id="horT"><span class="ic">${ic('cle')}</span><b>${t('arrivee')} · ${t('depart')}</b><span>${V.arrivee} · ${V.depart}</span></button>
@@ -204,6 +214,9 @@
   function vVilla() {
     $('#main').innerHTML = `
       <section class="sec"><div class="card" style="display:flex;justify-content:space-around;text-align:center"><div><p class="label">${t('arrivee')}</p><b style="font:400 30px var(--f-t)">${V.arrivee}</b></div><div><p class="label">${t('depart')}</p><b style="font:400 30px var(--f-t)">${V.depart}</b></div></div></section>
+      <section class="sec"><div class="facts">${V.chiffres.map(c => `<div><b>${esc(c.v)}</b><span>${esc(L(c.t))}</span></div>`).join('')}</div></section>
+      <section class="sec"><h2>${t('galerie')}</h2><div class="gal">${INFO.espaces.map(e => `<figure>${scene({ piscine: 'piscine', lit: 'suite', soleil: 'rooftop', spa: 'hammam' }[e.icon] || 'piscine')}<figcaption>${esc(L(e.t))}</figcaption></figure>`).join('')}</div></section>
+      <section class="sec"><h2>${t('equipe')}</h2><div class="list">${V.equipe.map(m => `<div class="li"><span class="avatar">${esc(m.n[0])}</span><div><b>${esc(m.n)}</b><p>${esc(L(m.r))}</p></div></div>`).join('')}</div></section>
       <section class="sec"><h2>${t('equipements')}</h2><div class="list">${INFO.espaces.map(e => `<div class="li"><span class="ic">${ic(e.icon)}</span><div><b>${esc(L(e.t))}</b><p>${esc(L(e.d))}</p></div></div>`).join('')}</div></section>
       <section class="sec"><h2>${t('modes')}</h2>${INFO.modes.map(m => `<details class="acc"><summary>${esc(L(m.t))}</summary><p>${esc(L(m.d))}</p></details>`).join('')}</section>
       <section class="sec"><h2>${t('consignes')}</h2><div class="card"><ul class="rules">${INFO.consignes.map(c => `<li>${esc(L(c))}</li>`).join('')}</ul></div></section>
